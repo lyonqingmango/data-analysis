@@ -1,0 +1,1205 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "1-1. Read the dataset"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {
+    "scrolled": true
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>DistrictType</th>\n",
+       "      <th>DistrictTTL</th>\n",
+       "      <th>SchoolTTL</th>\n",
+       "      <th>HighestAchievement</th>\n",
+       "      <th>YearAfterGrad</th>\n",
+       "      <th>DemographicGrouping</th>\n",
+       "      <th>DemographicValue</th>\n",
+       "      <th>MedianEarnings</th>\n",
+       "      <th>MedianHours</th>\n",
+       "      <th>NumRecords</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>School Dist</td>\n",
+       "      <td>Aberdeen School District</td>\n",
+       "      <td>Aberdeen High School</td>\n",
+       "      <td>Associate/Certificate</td>\n",
+       "      <td>3</td>\n",
+       "      <td>All Students</td>\n",
+       "      <td>All</td>\n",
+       "      <td>16100</td>\n",
+       "      <td>1343.0</td>\n",
+       "      <td>45</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>School Dist</td>\n",
+       "      <td>Aberdeen School District</td>\n",
+       "      <td>Aberdeen High School</td>\n",
+       "      <td>Associate/Certificate</td>\n",
+       "      <td>4</td>\n",
+       "      <td>All Students</td>\n",
+       "      <td>All</td>\n",
+       "      <td>21100</td>\n",
+       "      <td>1615.0</td>\n",
+       "      <td>90</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>School Dist</td>\n",
+       "      <td>Aberdeen School District</td>\n",
+       "      <td>Aberdeen High School</td>\n",
+       "      <td>Associate/Certificate</td>\n",
+       "      <td>4</td>\n",
+       "      <td>Gender</td>\n",
+       "      <td>Female</td>\n",
+       "      <td>19400</td>\n",
+       "      <td>1457.5</td>\n",
+       "      <td>60</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>School Dist</td>\n",
+       "      <td>Aberdeen School District</td>\n",
+       "      <td>Aberdeen High School</td>\n",
+       "      <td>Associate/Certificate</td>\n",
+       "      <td>4</td>\n",
+       "      <td>Gender</td>\n",
+       "      <td>Male</td>\n",
+       "      <td>23300</td>\n",
+       "      <td>1724.5</td>\n",
+       "      <td>30</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>School Dist</td>\n",
+       "      <td>Aberdeen School District</td>\n",
+       "      <td>Aberdeen High School</td>\n",
+       "      <td>Associate/Certificate</td>\n",
+       "      <td>4</td>\n",
+       "      <td>GPA</td>\n",
+       "      <td>&lt;3.0</td>\n",
+       "      <td>27400</td>\n",
+       "      <td>1793.0</td>\n",
+       "      <td>30</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "  DistrictType               DistrictTTL             SchoolTTL  \\\n",
+       "0  School Dist  Aberdeen School District  Aberdeen High School   \n",
+       "1  School Dist  Aberdeen School District  Aberdeen High School   \n",
+       "2  School Dist  Aberdeen School District  Aberdeen High School   \n",
+       "3  School Dist  Aberdeen School District  Aberdeen High School   \n",
+       "4  School Dist  Aberdeen School District  Aberdeen High School   \n",
+       "\n",
+       "      HighestAchievement  YearAfterGrad DemographicGrouping DemographicValue  \\\n",
+       "0  Associate/Certificate              3        All Students              All   \n",
+       "1  Associate/Certificate              4        All Students              All   \n",
+       "2  Associate/Certificate              4              Gender           Female   \n",
+       "3  Associate/Certificate              4              Gender             Male   \n",
+       "4  Associate/Certificate              4                 GPA             <3.0   \n",
+       "\n",
+       "   MedianEarnings  MedianHours  NumRecords  \n",
+       "0           16100       1343.0          45  \n",
+       "1           21100       1615.0          90  \n",
+       "2           19400       1457.5          60  \n",
+       "3           23300       1724.5          30  \n",
+       "4           27400       1793.0          30  "
+      ]
+     },
+     "execution_count": 1,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "import pandas as pd\n",
+    "\n",
+    "df = pd.read_csv('High_School_Earnings.csv') # Read CSV \n",
+    "\n",
+    "df.head()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "1-2. Select and display only the related data which DistrictTTL is equal to “Seattle Public Schools”, or \"Lake Washington School District” or “Bellevue School District” or “Mercer Island School District”or “Renton School District”."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "ndf=df.loc[(df['DistrictTTL']=='Seattle Public Schools')|(df['DistrictTTL']=='Lake Washington School District')|\n",
+    "       (df['DistrictTTL']=='Bellevue School District')|(df['DistrictTTL']=='Mercer Island School District')\n",
+    "       |(df['DistrictTTL']=='Renton School District')]\n",
+    " \n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>DistrictType</th>\n",
+       "      <th>DistrictTTL</th>\n",
+       "      <th>SchoolTTL</th>\n",
+       "      <th>HighestAchievement</th>\n",
+       "      <th>YearAfterGrad</th>\n",
+       "      <th>DemographicGrouping</th>\n",
+       "      <th>DemographicValue</th>\n",
+       "      <th>MedianEarnings</th>\n",
+       "      <th>MedianHours</th>\n",
+       "      <th>NumRecords</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>3328</th>\n",
+       "      <td>School Dist</td>\n",
+       "      <td>Bellevue School District</td>\n",
+       "      <td>District Wide</td>\n",
+       "      <td>HS Diploma</td>\n",
+       "      <td>6</td>\n",
+       "      <td>GPA</td>\n",
+       "      <td>&gt;=3.0</td>\n",
+       "      <td>28300</td>\n",
+       "      <td>1663.0</td>\n",
+       "      <td>441</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3895</th>\n",
+       "      <td>School Dist</td>\n",
+       "      <td>Bellevue School District</td>\n",
+       "      <td>Sammamish Sr. High</td>\n",
+       "      <td>HS Diploma</td>\n",
+       "      <td>5</td>\n",
+       "      <td>GPA</td>\n",
+       "      <td>&lt;3.0</td>\n",
+       "      <td>25400</td>\n",
+       "      <td>1599.5</td>\n",
+       "      <td>338</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4145</th>\n",
+       "      <td>School Dist</td>\n",
+       "      <td>Bellevue School District</td>\n",
+       "      <td>Bellevue High School</td>\n",
+       "      <td>Associate/Certificate</td>\n",
+       "      <td>5</td>\n",
+       "      <td>All Students</td>\n",
+       "      <td>All</td>\n",
+       "      <td>26100</td>\n",
+       "      <td>1361.0</td>\n",
+       "      <td>31</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4146</th>\n",
+       "      <td>School Dist</td>\n",
+       "      <td>Bellevue School District</td>\n",
+       "      <td>Bellevue High School</td>\n",
+       "      <td>Associate/Certificate</td>\n",
+       "      <td>6</td>\n",
+       "      <td>All Students</td>\n",
+       "      <td>All</td>\n",
+       "      <td>34700</td>\n",
+       "      <td>1725.0</td>\n",
+       "      <td>41</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4147</th>\n",
+       "      <td>School Dist</td>\n",
+       "      <td>Bellevue School District</td>\n",
+       "      <td>Bellevue High School</td>\n",
+       "      <td>Associate/Certificate</td>\n",
+       "      <td>7</td>\n",
+       "      <td>All Students</td>\n",
+       "      <td>All</td>\n",
+       "      <td>31400</td>\n",
+       "      <td>1685.0</td>\n",
+       "      <td>43</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "     DistrictType               DistrictTTL             SchoolTTL  \\\n",
+       "3328  School Dist  Bellevue School District         District Wide   \n",
+       "3895  School Dist  Bellevue School District    Sammamish Sr. High   \n",
+       "4145  School Dist  Bellevue School District  Bellevue High School   \n",
+       "4146  School Dist  Bellevue School District  Bellevue High School   \n",
+       "4147  School Dist  Bellevue School District  Bellevue High School   \n",
+       "\n",
+       "         HighestAchievement  YearAfterGrad DemographicGrouping  \\\n",
+       "3328             HS Diploma              6                 GPA   \n",
+       "3895             HS Diploma              5                 GPA   \n",
+       "4145  Associate/Certificate              5        All Students   \n",
+       "4146  Associate/Certificate              6        All Students   \n",
+       "4147  Associate/Certificate              7        All Students   \n",
+       "\n",
+       "     DemographicValue  MedianEarnings  MedianHours  NumRecords  \n",
+       "3328            >=3.0           28300       1663.0         441  \n",
+       "3895             <3.0           25400       1599.5         338  \n",
+       "4145              All           26100       1361.0          31  \n",
+       "4146              All           34700       1725.0          41  \n",
+       "4147              All           31400       1685.0          43  "
+      ]
+     },
+     "execution_count": 3,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "ndf.head()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "1-3. Based on the selection ndf, Select and display only all the related data which The YearAfterGrad is greater than or equal to 7 and the SchoolTTL does not contain the word “District” and then name the selection as hdf.\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "hdf=ndf.loc[(ndf['YearAfterGrad'] >=7)& (~ndf[\"SchoolTTL\"].str.contains(\"District\"))]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>DistrictType</th>\n",
+       "      <th>DistrictTTL</th>\n",
+       "      <th>SchoolTTL</th>\n",
+       "      <th>HighestAchievement</th>\n",
+       "      <th>YearAfterGrad</th>\n",
+       "      <th>DemographicGrouping</th>\n",
+       "      <th>DemographicValue</th>\n",
+       "      <th>MedianEarnings</th>\n",
+       "      <th>MedianHours</th>\n",
+       "      <th>NumRecords</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>4147</th>\n",
+       "      <td>School Dist</td>\n",
+       "      <td>Bellevue School District</td>\n",
+       "      <td>Bellevue High School</td>\n",
+       "      <td>Associate/Certificate</td>\n",
+       "      <td>7</td>\n",
+       "      <td>All Students</td>\n",
+       "      <td>All</td>\n",
+       "      <td>31400</td>\n",
+       "      <td>1685.0</td>\n",
+       "      <td>43</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4148</th>\n",
+       "      <td>School Dist</td>\n",
+       "      <td>Bellevue School District</td>\n",
+       "      <td>Bellevue High School</td>\n",
+       "      <td>Associate/Certificate</td>\n",
+       "      <td>8</td>\n",
+       "      <td>All Students</td>\n",
+       "      <td>All</td>\n",
+       "      <td>37800</td>\n",
+       "      <td>2018.0</td>\n",
+       "      <td>39</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4149</th>\n",
+       "      <td>School Dist</td>\n",
+       "      <td>Bellevue School District</td>\n",
+       "      <td>Bellevue High School</td>\n",
+       "      <td>Associate/Certificate</td>\n",
+       "      <td>9</td>\n",
+       "      <td>All Students</td>\n",
+       "      <td>All</td>\n",
+       "      <td>34800</td>\n",
+       "      <td>1866.0</td>\n",
+       "      <td>59</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4150</th>\n",
+       "      <td>School Dist</td>\n",
+       "      <td>Bellevue School District</td>\n",
+       "      <td>Bellevue High School</td>\n",
+       "      <td>Associate/Certificate</td>\n",
+       "      <td>10</td>\n",
+       "      <td>All Students</td>\n",
+       "      <td>All</td>\n",
+       "      <td>44100</td>\n",
+       "      <td>1713.0</td>\n",
+       "      <td>42</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4151</th>\n",
+       "      <td>School Dist</td>\n",
+       "      <td>Bellevue School District</td>\n",
+       "      <td>Bellevue High School</td>\n",
+       "      <td>Associate/Certificate</td>\n",
+       "      <td>11</td>\n",
+       "      <td>All Students</td>\n",
+       "      <td>All</td>\n",
+       "      <td>46700</td>\n",
+       "      <td>1982.0</td>\n",
+       "      <td>31</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "     DistrictType               DistrictTTL             SchoolTTL  \\\n",
+       "4147  School Dist  Bellevue School District  Bellevue High School   \n",
+       "4148  School Dist  Bellevue School District  Bellevue High School   \n",
+       "4149  School Dist  Bellevue School District  Bellevue High School   \n",
+       "4150  School Dist  Bellevue School District  Bellevue High School   \n",
+       "4151  School Dist  Bellevue School District  Bellevue High School   \n",
+       "\n",
+       "         HighestAchievement  YearAfterGrad DemographicGrouping  \\\n",
+       "4147  Associate/Certificate              7        All Students   \n",
+       "4148  Associate/Certificate              8        All Students   \n",
+       "4149  Associate/Certificate              9        All Students   \n",
+       "4150  Associate/Certificate             10        All Students   \n",
+       "4151  Associate/Certificate             11        All Students   \n",
+       "\n",
+       "     DemographicValue  MedianEarnings  MedianHours  NumRecords  \n",
+       "4147              All           31400       1685.0          43  \n",
+       "4148              All           37800       2018.0          39  \n",
+       "4149              All           34800       1866.0          59  \n",
+       "4150              All           44100       1713.0          42  \n",
+       "4151              All           46700       1982.0          31  "
+      ]
+     },
+     "execution_count": 5,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "hdf.head()\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "1-4. Based on the selection hdf, find the greatest number of records(NumRecords)and then select that row which has the greatest number of records(NumRecords)and display the values of \"SchoolTTL\" and \"HighestAchievement”."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>SchoolTTL</th>\n",
+       "      <th>HighestAchievement</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>51675</th>\n",
+       "      <td>Redmond High School</td>\n",
+       "      <td>Bachelor's or Higher</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "                 SchoolTTL    HighestAchievement\n",
+       "51675  Redmond High School  Bachelor's or Higher"
+      ]
+     },
+     "execution_count": 6,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "hdf.loc[hdf[\"NumRecords\"]==hdf.NumRecords.max(),[\"SchoolTTL\", \"HighestAchievement\"]] #Q1 answer "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "2-1. Based on the selection hdf, select and display only all the related data which \"HighestAchievement\" is equal to  than \"Bachelor's or Higher and the DemographicGrouping is equal to \"All Students\" then name the selection as sdf."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "sdf=hdf.loc[(hdf[\"HighestAchievement\"]==\"Bachelor's or Higher\")&(hdf[\"DemographicGrouping\"]==\"All Students\")]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>DistrictType</th>\n",
+       "      <th>DistrictTTL</th>\n",
+       "      <th>SchoolTTL</th>\n",
+       "      <th>HighestAchievement</th>\n",
+       "      <th>YearAfterGrad</th>\n",
+       "      <th>DemographicGrouping</th>\n",
+       "      <th>DemographicValue</th>\n",
+       "      <th>MedianEarnings</th>\n",
+       "      <th>MedianHours</th>\n",
+       "      <th>NumRecords</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>4168</th>\n",
+       "      <td>School Dist</td>\n",
+       "      <td>Bellevue School District</td>\n",
+       "      <td>Bellevue High School</td>\n",
+       "      <td>Bachelor's or Higher</td>\n",
+       "      <td>7</td>\n",
+       "      <td>All Students</td>\n",
+       "      <td>All</td>\n",
+       "      <td>46000</td>\n",
+       "      <td>1934.0</td>\n",
+       "      <td>643</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4177</th>\n",
+       "      <td>School Dist</td>\n",
+       "      <td>Bellevue School District</td>\n",
+       "      <td>Bellevue High School</td>\n",
+       "      <td>Bachelor's or Higher</td>\n",
+       "      <td>8</td>\n",
+       "      <td>All Students</td>\n",
+       "      <td>All</td>\n",
+       "      <td>50100</td>\n",
+       "      <td>1936.0</td>\n",
+       "      <td>613</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4186</th>\n",
+       "      <td>School Dist</td>\n",
+       "      <td>Bellevue School District</td>\n",
+       "      <td>Bellevue High School</td>\n",
+       "      <td>Bachelor's or Higher</td>\n",
+       "      <td>9</td>\n",
+       "      <td>All Students</td>\n",
+       "      <td>All</td>\n",
+       "      <td>54400</td>\n",
+       "      <td>1923.0</td>\n",
+       "      <td>583</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4195</th>\n",
+       "      <td>School Dist</td>\n",
+       "      <td>Bellevue School District</td>\n",
+       "      <td>Bellevue High School</td>\n",
+       "      <td>Bachelor's or Higher</td>\n",
+       "      <td>10</td>\n",
+       "      <td>All Students</td>\n",
+       "      <td>All</td>\n",
+       "      <td>60200</td>\n",
+       "      <td>1920.0</td>\n",
+       "      <td>467</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4204</th>\n",
+       "      <td>School Dist</td>\n",
+       "      <td>Bellevue School District</td>\n",
+       "      <td>Bellevue High School</td>\n",
+       "      <td>Bachelor's or Higher</td>\n",
+       "      <td>11</td>\n",
+       "      <td>All Students</td>\n",
+       "      <td>All</td>\n",
+       "      <td>64200</td>\n",
+       "      <td>1933.5</td>\n",
+       "      <td>354</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "     DistrictType               DistrictTTL             SchoolTTL  \\\n",
+       "4168  School Dist  Bellevue School District  Bellevue High School   \n",
+       "4177  School Dist  Bellevue School District  Bellevue High School   \n",
+       "4186  School Dist  Bellevue School District  Bellevue High School   \n",
+       "4195  School Dist  Bellevue School District  Bellevue High School   \n",
+       "4204  School Dist  Bellevue School District  Bellevue High School   \n",
+       "\n",
+       "        HighestAchievement  YearAfterGrad DemographicGrouping  \\\n",
+       "4168  Bachelor's or Higher              7        All Students   \n",
+       "4177  Bachelor's or Higher              8        All Students   \n",
+       "4186  Bachelor's or Higher              9        All Students   \n",
+       "4195  Bachelor's or Higher             10        All Students   \n",
+       "4204  Bachelor's or Higher             11        All Students   \n",
+       "\n",
+       "     DemographicValue  MedianEarnings  MedianHours  NumRecords  \n",
+       "4168              All           46000       1934.0         643  \n",
+       "4177              All           50100       1936.0         613  \n",
+       "4186              All           54400       1923.0         583  \n",
+       "4195              All           60200       1920.0         467  \n",
+       "4204              All           64200       1933.5         354  "
+      ]
+     },
+     "execution_count": 8,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "sdf.head()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "2-2. Then sum all the values of NumRecords"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "47564"
+      ]
+     },
+     "execution_count": 9,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "sdf.NumRecords.sum()#Q2 answer"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "3-1. Based on the selection hdf, select and display only all the related data which \"HighestAchievement\" is equal to  than \"HS Diploma\" and the \"DemographicValue\" is equal to \"FRPL\" then name the selection as tdf."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "tdf=hdf.loc[(hdf[\"HighestAchievement\"]==\"HS Diploma\")&(hdf[\"DemographicValue\"]==\"FRPL\")]\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>DistrictType</th>\n",
+       "      <th>DistrictTTL</th>\n",
+       "      <th>SchoolTTL</th>\n",
+       "      <th>HighestAchievement</th>\n",
+       "      <th>YearAfterGrad</th>\n",
+       "      <th>DemographicGrouping</th>\n",
+       "      <th>DemographicValue</th>\n",
+       "      <th>MedianEarnings</th>\n",
+       "      <th>MedianHours</th>\n",
+       "      <th>NumRecords</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>4288</th>\n",
+       "      <td>School Dist</td>\n",
+       "      <td>Bellevue School District</td>\n",
+       "      <td>Bellevue High School</td>\n",
+       "      <td>HS Diploma</td>\n",
+       "      <td>7</td>\n",
+       "      <td>FRPL</td>\n",
+       "      <td>FRPL</td>\n",
+       "      <td>27000</td>\n",
+       "      <td>1640.0</td>\n",
+       "      <td>45</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4299</th>\n",
+       "      <td>School Dist</td>\n",
+       "      <td>Bellevue School District</td>\n",
+       "      <td>Bellevue High School</td>\n",
+       "      <td>HS Diploma</td>\n",
+       "      <td>8</td>\n",
+       "      <td>FRPL</td>\n",
+       "      <td>FRPL</td>\n",
+       "      <td>27300</td>\n",
+       "      <td>1558.5</td>\n",
+       "      <td>36</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4310</th>\n",
+       "      <td>School Dist</td>\n",
+       "      <td>Bellevue School District</td>\n",
+       "      <td>Bellevue High School</td>\n",
+       "      <td>HS Diploma</td>\n",
+       "      <td>9</td>\n",
+       "      <td>FRPL</td>\n",
+       "      <td>FRPL</td>\n",
+       "      <td>30000</td>\n",
+       "      <td>1841.0</td>\n",
+       "      <td>31</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4912</th>\n",
+       "      <td>School Dist</td>\n",
+       "      <td>Bellevue School District</td>\n",
+       "      <td>Interlake Sr. High School</td>\n",
+       "      <td>HS Diploma</td>\n",
+       "      <td>7</td>\n",
+       "      <td>FRPL</td>\n",
+       "      <td>FRPL</td>\n",
+       "      <td>29800</td>\n",
+       "      <td>1747.5</td>\n",
+       "      <td>78</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4924</th>\n",
+       "      <td>School Dist</td>\n",
+       "      <td>Bellevue School District</td>\n",
+       "      <td>Interlake Sr. High School</td>\n",
+       "      <td>HS Diploma</td>\n",
+       "      <td>8</td>\n",
+       "      <td>FRPL</td>\n",
+       "      <td>FRPL</td>\n",
+       "      <td>30500</td>\n",
+       "      <td>1706.0</td>\n",
+       "      <td>67</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "     DistrictType               DistrictTTL                  SchoolTTL  \\\n",
+       "4288  School Dist  Bellevue School District       Bellevue High School   \n",
+       "4299  School Dist  Bellevue School District       Bellevue High School   \n",
+       "4310  School Dist  Bellevue School District       Bellevue High School   \n",
+       "4912  School Dist  Bellevue School District  Interlake Sr. High School   \n",
+       "4924  School Dist  Bellevue School District  Interlake Sr. High School   \n",
+       "\n",
+       "     HighestAchievement  YearAfterGrad DemographicGrouping DemographicValue  \\\n",
+       "4288         HS Diploma              7                FRPL             FRPL   \n",
+       "4299         HS Diploma              8                FRPL             FRPL   \n",
+       "4310         HS Diploma              9                FRPL             FRPL   \n",
+       "4912         HS Diploma              7                FRPL             FRPL   \n",
+       "4924         HS Diploma              8                FRPL             FRPL   \n",
+       "\n",
+       "      MedianEarnings  MedianHours  NumRecords  \n",
+       "4288           27000       1640.0          45  \n",
+       "4299           27300       1558.5          36  \n",
+       "4310           30000       1841.0          31  \n",
+       "4912           29800       1747.5          78  \n",
+       "4924           30500       1706.0          67  "
+      ]
+     },
+     "execution_count": 11,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "tdf.head()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "3-2. Based on the selection tdf, get the median value of the median earnings (the MedianEarnings column)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 12,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "31300.0"
+      ]
+     },
+     "execution_count": 12,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "tdf.MedianEarnings.median()#3 answer "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "4-1.Based on the selection hdf, select and display only all the related data which \"HighestAchievement\" is equal to  than \"Bachelor's or Higher\" and the \"DemographicValue\" is equal to \"Female\" then name the selection as f_df."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 13,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "f_df=hdf.loc[(hdf[\"HighestAchievement\"]==\"Bachelor's or Higher\")&(hdf[\"DemographicValue\"]==\"Female\")]"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "4-2. Bases on the selection f_df, find the greatest number of MedianEarnings as f"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 14,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "f=f_df.MedianEarnings.max()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "4-3.Based on the selection hdf, select and display only all the related data which \"HighestAchievement\" is equal to  than \"Bachelor's or Higher\" and the \"DemographicValue\" is equal to \"Male\" then name the selection as m_df."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 15,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "m_df=hdf.loc[(hdf[\"HighestAchievement\"]==\"Bachelor's or Higher\")&(hdf[\"DemographicValue\"]==\"Male\")]"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "4-4.Bases on the selection m_df, find the greatest number of MedianEarnings as m"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 16,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "m=m_df.MedianEarnings.max()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "4-5 Find the absolute value of the difference between m and f"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 17,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "25400"
+      ]
+     },
+     "execution_count": 17,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "abs(f-m)#4"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "5-1 Search the\"Median household income (in 2019 dollars), 2015-2019 in Washington State according to the\n",
+    "US Census Bureau which is 73775.\n",
+    "5-2 Based on the selection hdf, select and display only all the related data which \"MedianEarnings\" is greater than 73775 and name the selection as ldf.\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 18,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "ldf=hdf.loc[hdf[\"MedianEarnings\"]>73775]\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 19,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>DistrictType</th>\n",
+       "      <th>DistrictTTL</th>\n",
+       "      <th>SchoolTTL</th>\n",
+       "      <th>HighestAchievement</th>\n",
+       "      <th>YearAfterGrad</th>\n",
+       "      <th>DemographicGrouping</th>\n",
+       "      <th>DemographicValue</th>\n",
+       "      <th>MedianEarnings</th>\n",
+       "      <th>MedianHours</th>\n",
+       "      <th>NumRecords</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>4213</th>\n",
+       "      <td>School Dist</td>\n",
+       "      <td>Bellevue School District</td>\n",
+       "      <td>Bellevue High School</td>\n",
+       "      <td>Bachelor's or Higher</td>\n",
+       "      <td>12</td>\n",
+       "      <td>Gender</td>\n",
+       "      <td>Male</td>\n",
+       "      <td>79100</td>\n",
+       "      <td>2009.0</td>\n",
+       "      <td>100</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4983</th>\n",
+       "      <td>School Dist</td>\n",
+       "      <td>Bellevue School District</td>\n",
+       "      <td>International School</td>\n",
+       "      <td>Bachelor's or Higher</td>\n",
+       "      <td>11</td>\n",
+       "      <td>Gender</td>\n",
+       "      <td>Male</td>\n",
+       "      <td>76200</td>\n",
+       "      <td>1948.5</td>\n",
+       "      <td>30</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4984</th>\n",
+       "      <td>School Dist</td>\n",
+       "      <td>Bellevue School District</td>\n",
+       "      <td>International School</td>\n",
+       "      <td>Bachelor's or Higher</td>\n",
+       "      <td>12</td>\n",
+       "      <td>All Students</td>\n",
+       "      <td>All</td>\n",
+       "      <td>75200</td>\n",
+       "      <td>1992.0</td>\n",
+       "      <td>51</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>5061</th>\n",
+       "      <td>School Dist</td>\n",
+       "      <td>Bellevue School District</td>\n",
+       "      <td>Newport Senior High School</td>\n",
+       "      <td>Bachelor's or Higher</td>\n",
+       "      <td>12</td>\n",
+       "      <td>Gender</td>\n",
+       "      <td>Male</td>\n",
+       "      <td>89600</td>\n",
+       "      <td>2006.0</td>\n",
+       "      <td>118</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>5063</th>\n",
+       "      <td>School Dist</td>\n",
+       "      <td>Bellevue School District</td>\n",
+       "      <td>Newport Senior High School</td>\n",
+       "      <td>Bachelor's or Higher</td>\n",
+       "      <td>12</td>\n",
+       "      <td>GPA</td>\n",
+       "      <td>&gt;=3.0</td>\n",
+       "      <td>76800</td>\n",
+       "      <td>2000.0</td>\n",
+       "      <td>196</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "     DistrictType               DistrictTTL                   SchoolTTL  \\\n",
+       "4213  School Dist  Bellevue School District        Bellevue High School   \n",
+       "4983  School Dist  Bellevue School District        International School   \n",
+       "4984  School Dist  Bellevue School District        International School   \n",
+       "5061  School Dist  Bellevue School District  Newport Senior High School   \n",
+       "5063  School Dist  Bellevue School District  Newport Senior High School   \n",
+       "\n",
+       "        HighestAchievement  YearAfterGrad DemographicGrouping  \\\n",
+       "4213  Bachelor's or Higher             12              Gender   \n",
+       "4983  Bachelor's or Higher             11              Gender   \n",
+       "4984  Bachelor's or Higher             12        All Students   \n",
+       "5061  Bachelor's or Higher             12              Gender   \n",
+       "5063  Bachelor's or Higher             12                 GPA   \n",
+       "\n",
+       "     DemographicValue  MedianEarnings  MedianHours  NumRecords  \n",
+       "4213             Male           79100       2009.0         100  \n",
+       "4983             Male           76200       1948.5          30  \n",
+       "4984              All           75200       1992.0          51  \n",
+       "5061             Male           89600       2006.0         118  \n",
+       "5063            >=3.0           76800       2000.0         196  "
+      ]
+     },
+     "execution_count": 19,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "ldf.head()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "5-3 Based on the selection ldf, set an empty list as school_district.Iterate over content under the DistrictTTL.For each iteration,if content has not in the list school_district, put the content into the list of school_district.Finally print the list of school_district."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 26,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "['Bellevue School District', 'Lake Washington School District', 'Mercer Island School District']\n"
+     ]
+    }
+   ],
+   "source": [
+    "school_district=[]\n",
+    "for index,content in ldf.DistrictTTL.items():\n",
+    "    if not content in school_district:\n",
+    "        school_district.append(content)\n",
+    "\n",
+    "print(school_district)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.8.5"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 4
+}
